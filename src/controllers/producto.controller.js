@@ -8,7 +8,7 @@ class ProductoController{
         return res.json(productos)
     } 
     async guardar(req,res){ 
-        req.body.nombre
+        
         const producto = await models.Producto.create({
             nombre: req.body.nombre,
             descripcion: req.body.descripcion,
@@ -43,7 +43,18 @@ class ProductoController{
         })
         return res.json({mensaje:"eliminar producto"})
     }
+    async listarProducto(req,res){
+       
+        const producto = await models.Producto.findOne(
+            {
+                where:{
+                    id:req.params.idProducto
+                }
+            }
+        );
 
+        return res.json(producto)
+    }
 }
    
 export const productoController = new ProductoController;
