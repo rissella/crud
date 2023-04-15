@@ -1,0 +1,1 @@
+npx sequelize-cli model:generate --name Producto --attributes nombre:string,descripcion:string,codigobarrila:string,marca:string,precio:double
