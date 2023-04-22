@@ -3,21 +3,45 @@ import models from "./../models";
 
 class ProductoController{
     async listar(req,res){ 
-        const productos = await models.Producto.findAll();
-
-        return res.json(productos)
+        try {
+            const productos = await models.Producto.findAll();
+            return res.json(productos) ;           
+        } catch (error) {
+            return res.json(error);
+            
+        }
+      
     } 
     async guardar(req,res){ 
+        try {
+             if(req.body.nombre!=''){
+                const producto = await models.Producto.create({
+                    nombre: req.body.nombre,
+                    descripcion: req.body.descripcion,
+                    codigobarra: req.body.codigobarra,
+                    marca: req.body.marca,
+                    precio: req.body.precio
+                });
         
-        const producto = await models.Producto.create({
-            nombre: req.body.nombre,
-            descripcion: req.body.descripcion,
-            codigobarra: req.body.codigobarra,
-            marca: req.body.marca,
-            precio: req.body.precio
-          });
+                return res.json({mensaje:"guardar producto"})
+            }
+            else{
+                res.status(424).json({
+                    status:424,
+                    mensaje:"debe ingresar un nombre",
+                    error:true
+                })
+            }
+            
+        } catch (error) {
+            res.status(500).json({
+                status:500,
+                mensaje:"El sistema no puede completar la actualización",
+                error:error
+            })
+        }
+        
 
-        return res.json({mensaje:"guardar producto"})
 
     } 
     async modificar(req,res){ 

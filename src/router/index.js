@@ -2,6 +2,7 @@ import {Router} from "express"
 export const Route = Router();
 import { productoController } from "../controllers/producto.controller";
 import { categoriaController } from "../controllers/categoria.controller";
+import { userController } from "../controllers/user.controller";
 
 //endpoint
 Route.get('/inicio',function(req, res){
@@ -21,3 +22,6 @@ Route.delete('/producto/:idProducto',productoController.eliminar);
 
 //crud categoria
 Route.post('/categoria',categoriaController.crearCategoria)
+//CRUD usuario
+Route.post('/usuario',userController.createUser);
+Route.get('/login',userController.login);
