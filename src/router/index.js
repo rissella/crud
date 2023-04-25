@@ -3,7 +3,7 @@ export const Route = Router();
 import { productoController } from "../controllers/producto.controller";
 import { categoriaController } from "../controllers/categoria.controller";
 import { userController } from "../controllers/user.controller";
-
+import { auth } from "../middlewares/auth.middleware";
 //endpoint
 Route.get('/inicio',function(req, res){
     res.json({
@@ -13,15 +13,15 @@ Route.get('/inicio',function(req, res){
 });
 
 //crud producto
-Route.get('/producto',productoController.listar);
-Route.get('/producto/:idProducto/:otroid',productoController.listarProducto);
+Route.get('/producto',auth, productoController.listar);
+Route.get('/producto/:idProducto/:otroid',auth,productoController.listarProducto);
 
-Route.post('/producto',productoController.guardar);
-Route.put('/producto/:idProducto',productoController.modificar);
-Route.delete('/producto/:idProducto',productoController.eliminar);
+Route.post('/producto',auth,productoController.guardar);
+Route.put('/producto/:idProducto',auth,productoController.modificar);
+Route.delete('/producto/:idProducto',auth,productoController.eliminar);
 
 //crud categoria
-Route.post('/categoria',categoriaController.crearCategoria)
+Route.post('/categoria',auth,categoriaController.crearCategoria)
 //CRUD usuario
-Route.post('/usuario',userController.createUser);
+Route.post('/usuario',auth,userController.createUser);
 Route.get('/login',userController.login);

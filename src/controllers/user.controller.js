@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { DATE } from "sequelize";
 import models from "./../models";
+import { JWT_EXPIRATION,JWT_SECRET } from "../config/config";
 
 class UserController{
     async createUser(req,res){
@@ -49,8 +50,8 @@ class UserController{
                             id:usuario.id,
                             time:new DATE()
                         };
-                         let token = jwt.sign(payload,"Backend",{
-                            expiresIn:"1h"
+                         let token = jwt.sign(payload,JWT_SECRET,{
+                            expiresIn:JWT_EXPIRATION
                          })
                       return res.json({token:token})    
 
