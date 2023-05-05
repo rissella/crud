@@ -11,21 +11,41 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-    /*  models.Producto.hasOne(models.Categoria,{
-        foreignkey:id_categoria,
-      })*/
+      models.producto.belongsTo(models.categoria,{
+        foreignKey:'id_categoria',
+        
+      })
     }
   }
   Producto.init({
-    nombre: DataTypes.STRING,
-    descripcion: DataTypes.STRING,
-    codigobarra: DataTypes.STRING,
-    marca: DataTypes.STRING,
-    precio: DataTypes.DOUBLE,
-    id_categoria:DataTypes.INTEGER
+    nombre: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    descripcion: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    codigobarra: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    marca: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    precio: {
+      type:DataTypes.DOUBLE,
+      allowNull: false
+    },
+    id_categoria: {
+      type:DataTypes.INTEGER,
+      allowNull: false
+    }
   }, {
     sequelize,
-    modelName: 'Producto',
+    modelName: 'producto',
+    freezeTableName:true
   });
   return Producto;
 };

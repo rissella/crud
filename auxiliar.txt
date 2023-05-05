@@ -1,3 +1,3 @@
-npx sequelize-cli model:generate --name Producto --attributes nombre:string,descripcion:string,codigobarrila:string,marca:string,precio:double
+npx sequelize-cli model:generate --name Producto --attributes nombre:string,descripcion:string,codigobarrila:string,marca:string,precio:double,id_categoria:integer
 npx sequelize-cli model:generate --name Categoria --attributes id_categoria:integer,nombre:string,descripion:string
 npx sequelize-cli model:generate --name User --attributes name:string,email:string,password:string,status:boolean

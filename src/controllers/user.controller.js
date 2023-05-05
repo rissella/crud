@@ -24,7 +24,7 @@ class UserController{
            res.status(500).json({
                status:500,
                mensaje:"El sistema no puede completar la registro del usuario",
-               error:error
+               error:error.message
            })
        }
        

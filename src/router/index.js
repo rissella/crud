@@ -15,6 +15,7 @@ Route.get('/inicio',function(req, res){
 //crud producto
 Route.get('/producto',auth, productoController.listar);
 Route.get('/producto/:idProducto/:otroid',auth,productoController.listarProducto);
+Route.get('/productoCategoria',productoController.listarProductoCategoria)
 
 Route.post('/producto',auth,productoController.guardar);
 Route.put('/producto/:idProducto',auth,productoController.modificar);
@@ -22,6 +23,7 @@ Route.delete('/producto/:idProducto',auth,productoController.eliminar);
 
 //crud categoria
 Route.post('/categoria',auth,categoriaController.crearCategoria)
-//CRUD usuario
+
+//CRUD usuario tarea completar
 Route.post('/usuario',auth,userController.createUser);
 Route.get('/login',userController.login);

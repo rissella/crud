@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Productos', {
+    await queryInterface.createTable('producto', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,31 +11,35 @@ module.exports = {
       },
       id_categoria: {
         allowNull: false,
+        type: Sequelize.INTEGER,
         references: {
-          model: {
-            tableName: 'Categoria'
-                    },
+          model: {tableName: 'categoria' },
           key: 'id_categoria'
-        },
-        
+        }, 
+        onDelete:"CASCADE",
+         onUpdate:"CASCADE"  
 
-        type: Sequelize.INTEGER
+        
       },
       nombre: {
         type: Sequelize.STRING,
-         allowNull: false,
+         allowNull: false
       },
       descripcion: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       codigobarra: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       marca: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       precio: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.DOUBLE,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

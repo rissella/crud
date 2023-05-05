@@ -12,6 +12,24 @@ class ProductoController{
         }
       
     } 
+    async listarProductoCategoria(req,res){ 
+        try {
+            
+            const productos = await models.categoria.findAll({                
+              include: {
+                    model: models.producto,
+                    where: { nombre: req.body.nombre }                    
+                  }
+                
+            });
+            return res.json(productos) ;           
+        } catch (error) {
+            return res.json(error);
+            
+        }
+      
+    } 
+
     async guardar(req,res){ 
         try {
              if(req.body.nombre!=''){

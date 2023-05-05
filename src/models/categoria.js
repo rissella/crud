@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-     /* models.Categoria.hasMany(models.Producto,{
-        foreignkey:id_categoria,
-      })*/
+      models.categoria.hasMany(models.producto,{
+        foreignKey:'id_categoria'
+      })
     }
   }
   Categoria.init({
@@ -22,11 +22,18 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true // Automatically gets converted to SERIAL for postgres
     },
-    nombre: DataTypes.STRING,
-    descripcion: DataTypes.STRING
+    nombre:{
+      type:DataTypes.STRING,
+      allowNull: false
+    } ,
+    descripcion: {
+      type:DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
-    modelName: 'Categoria',
+    modelName: 'categoria',
+    freezeTableName:true
   });
   return Categoria;
 };
