@@ -1,27 +1,36 @@
 import { where } from "sequelize";
+import categoria from "../models/categoria";
 import models from "./../models";
 
 class ProductoController{
     async listar(req,res){ 
         try {
+          //console.log(111111);
+
             const productos = await models.Producto.findAll();
-            return res.json(productos) ;           
+            return res.status(200).json(productos);   
+
         } catch (error) {
-            return res.json(error);
-            
+            return res.status(500).json(error);            
         }
       
     } 
     async listarProductoCategoria(req,res){ 
         try {
             
-            const productos = await models.categoria.findAll({                
-              include: {
+           /* 
+           sequelize
+           const productos = await models.categoria.findAll({ 
+                attributes: ['nombre'],          
+             include: {
                     model: models.producto,
-                    where: { nombre: req.body.nombre }                    
-                  }
-                
-            });
+                    attributes:{exclude:['createdAt','updatedAt']} ,                     
+                   right: true                 
+                  }   
+
+            });*/
+   ///sql
+            const  [productos, metadata] = await models.sequelize.query("select c.nombre,p.* from categoria as c, producto as p where c.id_categoria=p.id_categoria ")
             return res.json(productos) ;           
         } catch (error) {
             return res.json(error);

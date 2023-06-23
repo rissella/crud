@@ -2,14 +2,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('producto', {
+    await queryInterface.createTable('detalleFactura', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_categoria: {
+      codigo_producto: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {tableName: 'producto' },
+          key: 'id'
+        }, 
+        onDelete:"CASCADE",
+         onUpdate:"CASCADE"          
+      },
+      num_factura: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
@@ -19,25 +29,14 @@ module.exports = {
         onDelete:"CASCADE",
          onUpdate:"CASCADE"          
       },
-      nombre: {
-        type: Sequelize.STRING,
-         allowNull: false
-      },
-      descripcion: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      codigobarra: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      marca: {
-        type: Sequelize.STRING,
-        allowNull: false
+      cantidad: {
+        type: Sequelize.INTEGER
       },
       precio: {
-        type: Sequelize.DOUBLE,
-        allowNull: false
+        type: Sequelize.DOUBLE
+      },
+      estado: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -50,6 +49,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('producto');
+    await queryInterface.dropTable('detalleFactura');
   }
 };

@@ -1,10 +1,12 @@
 /// 1 importar módulos terceros
 const express = require ("express");
-import {Route} from "./router/index"
+import {Route} from "./router/index";
+import cors from "cors"
 // 2. declarar variables auxiliares
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 // 3. inicializando express 
 let app= express();
+app.use(cors());
 
 //7. habilitar json en body
 app.use(express.json());
